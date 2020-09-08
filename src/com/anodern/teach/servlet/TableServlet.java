@@ -47,7 +47,7 @@ public class TableServlet extends HttpServlet {
                         }
                     }
                 }
-    
+                
                 for(int i = 0;i < 7;i++){
                     for(int j = 0;j < 11;j++){
                         if(tb[i][j]==null) tb[i][j]=" <br> <br> ";
