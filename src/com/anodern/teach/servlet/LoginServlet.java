@@ -14,13 +14,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @WebServlet(value = "/login", name = "LoginServlet")
-public class LoginServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {;
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out=response.getWriter();
         HttpSession session=request.getSession();
-        //git TEST2
     
         String id = request.getParameter("id");
         if(id.equals("0")) {
