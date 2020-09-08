@@ -20,6 +20,7 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out=response.getWriter();
         HttpSession session=request.getSession();
+        //git TEST
     
         String id = request.getParameter("id");
         if(id.equals("0")) {
