@@ -20,8 +20,8 @@
             <ul class="par">
                 <li><a href="course">课程浏览</a></li>
                 <li><a href="mcourse-add.jsp">课程新增</a></li>
-                <li><a href="mcourse-edit.jsp">课程编辑</a></li>
-                <li><a href="editcourses.jsp">批量编辑</a></li>
+                <li><a href="">课程编辑</a></li>
+                <li><a href="">批量编辑</a></li>
             </ul>
         </div>
         <div class="main-content">

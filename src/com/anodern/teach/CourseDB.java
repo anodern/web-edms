@@ -13,8 +13,7 @@ public class CourseDB extends DBConn {
     
     public PageBean getCoursePage(int curPage){
         String sql = "select * from course";
-        PageBean pageBean = getPageBean(sql, null, curPage);
-        return pageBean;
+        return getPageBean(sql, null, curPage);
     }
     
     public PageBean getCoursePage(int curPage,String sql){

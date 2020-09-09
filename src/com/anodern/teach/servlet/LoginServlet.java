@@ -22,6 +22,8 @@ public class LoginServlet extends HttpServlet {;
         HttpSession session=request.getSession();
     
         String id = request.getParameter("id");
+        
+        //TODO: 快捷登录
         if(id.equals("0")) {
             User user=new User();
             user.setId("1000");
@@ -52,6 +54,7 @@ public class LoginServlet extends HttpServlet {;
             session.setAttribute("isLogin",true);
             //response.sendRedirect("course");
         }
+        
         String pass = (new MD5Bean().getmd5BeanofStr(request.getParameter("pass"))).toLowerCase();
         String vcode=request.getParameter("vcode");
         String realVcode=(String)session.getAttribute("vcode");
@@ -64,10 +67,11 @@ public class LoginServlet extends HttpServlet {;
             case "2": level=2; break;
         }
         
+        //TODO:无视验证码
         vcode=realVcode;
+        
         if(vcode.equalsIgnoreCase(realVcode)){
             UserDB userDB=new UserDB();
-            
             String name=userDB.isLogin(id,pass,level);
             
             if(name!=null){

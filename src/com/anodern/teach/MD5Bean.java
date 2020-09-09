@@ -1,28 +1,27 @@
 package com.anodern.teach;
 import java.lang.reflect.*;
-import java.util.*;
 
 public class MD5Bean {
     /* 下面这些S11-S44实际上是一个4*4的矩阵，在原始的C实现中是用#define 实现的，
 这里把它们实现成为static final是表示了只读，切能在同一个进程空间内的多个
 Instance间共享*/
-    static final int S11 = 7;
-    static final int S12 = 12;
-    static final int S13 = 17;
-    static final int S14 = 22;
-    static final int S21 = 5;
-    static final int S22 = 9;
-    static final int S23 = 14;
-    static final int S24 = 20;
-    static final int S31 = 4;
-    static final int S32 = 11;
-    static final int S33 = 16;
-    static final int S34 = 23;
-    static final int S41 = 6;
-    static final int S42 = 10;
-    static final int S43 = 15;
-    static final int S44 = 21;
-    static final byte[] PADDING = { -128, 0, 0, 0, 0, 0, 0, 0, 0,
+    private static final int S11 = 7;
+    private static final int S12 = 12;
+    private static final int S13 = 17;
+    private static final int S14 = 22;
+    private static final int S21 = 5;
+    private static final int S22 = 9;
+    private static final int S23 = 14;
+    private static final int S24 = 20;
+    private static final int S31 = 4;
+    private static final int S32 = 11;
+    private static final int S33 = 16;
+    private static final int S34 = 23;
+    private static final int S41 = 6;
+    private static final int S42 = 10;
+    private static final int S43 = 15;
+    private static final int S44 = 21;
+    private static final byte[] PADDING = { -128, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -32,10 +31,6 @@ Instance间共享*/
     private long[] state = new long[4]; // state (ABCD)
     private long[] count = new long[2]; // number of bits, modulo 2^64 (lsb first)
     private byte[] buffer = new byte[64]; // input buffer
-    /* digestHexStr是md5Bean的唯一一个公共成员，是最新一次计算结果的
-    　 16进制ASCII表示.
-    */
-    public String digestHexStr;
     /* digest,是最新一次计算结果的2进制内部表示，表示128bit的md5Bean值.
      */
     private byte[] digest = new byte[16];
@@ -47,19 +42,21 @@ Instance间共享*/
         md5BeanInit();
         md5BeanUpdate(inbuf.getBytes(), inbuf.length());
         md5BeanFinal();
-        digestHexStr = "";
+        /* digestHexStr是md5Bean的唯一一个公共成员，是最新一次计算结果的
+    　 16进制ASCII表示.
+    */
+        StringBuilder digestHexStr = new StringBuilder();
         for (int i = 0; i < 16; i++) {
-            digestHexStr += byteHEX(digest[i]);
+            digestHexStr.append(byteHEX(digest[i]));
         }
-        return digestHexStr;
-    }
-    // 这是md5Bean这个类的标准构造函数，JavaBean要求有一个public的并且没有参数的构造函数
-    public MD5Bean() {
-        md5BeanInit();
-        return;
+        return digestHexStr.toString();
     }
     
-    /* md5BeanInit是一个初始化函数，初始化核心变量，装入标准的幻数 */
+    public MD5Bean() {
+        md5BeanInit();
+    }
+    
+    //初始化函数，初始化核心变量，装入标准的幻数
     private void md5BeanInit() {
         count[0] = 0L;
         count[1] = 0L;
@@ -68,11 +65,8 @@ Instance间共享*/
         state[1] = 0xefcdab89L;
         state[2] = 0x98badcfeL;
         state[3] = 0x10325476L;
-        return;
     }
-    /* F, G, H ,I 是4个基本的md5Bean函数，在原始的md5Bean的C实现中，由于它们是
-    简单的位运算，可能出于效率的考虑把它们实现成了宏，在java中，我们把它们
-    　　实现成了private方法，名字保持了原来C中的。 */
+    //F, G, H ,I 是4个基本的md5Bean函数，在原始的md5Bean的C实现中，由于它们是
     private long F(long x, long y, long z) {
         return (x & y) | ((~x) & z);
     }
@@ -85,11 +79,8 @@ Instance间共享*/
     private long I(long x, long y, long z) {
         return y ^ (x | (~z));
     }
-    /*
-    FF,GG,HH和II将调用F,G,H,I进行近一步变换
-    FF, GG, HH, and II transformations for rounds 1, 2, 3, and 4.
-    Rotation is separate from addition to prevent recomputation.
-    */
+    
+    //FF,GG,HH和II将调用F,G,H,I进行近一步变换
     private long FF(long a, long b, long c, long d, long x, long s,
                     long ac) {
         a += F (b, c, d) + x + ac;
@@ -119,7 +110,7 @@ Instance间共享*/
         return a;
     }
     /*
-    md5BeanUpdate是md5Bean的主计算过程，inbuf是要变换的字节串，inputlen是长度，这个
+    md5Bean的主计算过程，inbuf是要变换的字节串，inputlen是长度，这个
     函数由getmd5BeanofStr调用，调用之前需要调用md5Beaninit，因此把它设计成private的
     */
     private void md5BeanUpdate(byte[] inbuf, int inputLen) {
@@ -145,9 +136,8 @@ Instance间共享*/
         ///* Buffer remaining input */
         md5BeanMemcpy(buffer, inbuf, index, i, inputLen - i);
     }
-    /*
-    md5BeanFinal整理和填写输出结果
-    */
+    
+    //md5BeanFinal整理和填写输出结果
     private void md5BeanFinal () {
         byte[] bits = new byte[8];
         int index, padLen;
@@ -162,23 +152,17 @@ Instance间共享*/
         ///* Store state in digest */
         Encode (digest, state, 16);
     }
-    /* md5BeanMemcpy是一个内部使用的byte数组的块拷贝函数，从input的inpos开始把len长度的
-    　　　　　 字节拷贝到output的outpos位置开始
-    */
-    private void md5BeanMemcpy (byte[] output, byte[] input,
-                                int outpos, int inpos, int len)
-    {
+    //内部使用的byte数组的块拷贝函数，从input的inpos开始把len长度的字节拷贝到output的outpos位置开始
+    private void md5BeanMemcpy (byte[] output, byte[] input, int outpos, int inpos, int len) {
         int i;
-        for (i = 0; i < len; i++)
-            output[outpos + i] = input[inpos + i];
+        for (i = 0; i < len; i++) output[outpos + i] = input[inpos + i];
     }
-    /*
-    md5BeanTransform是md5Bean核心变换程序，有md5BeanUpdate调用，block是分块的原始字节
-    */
-    private void md5BeanTransform (byte block[]) {
+    
+    //md5BeanTransform是md5Bean核心变换程序，有md5BeanUpdate调用，block是分块的原始字节
+    private void md5BeanTransform (byte[] block) {
         long a = state[0], b = state[1], c = state[2], d = state[3];
         long[] x = new long[16];
-        Decode (x, block, 64);
+        Decode (x, block);
         /* Round 1 */
         a = FF (a, b, c, d, x[0], S11, 0xd76aa478L); /* 1 */
         d = FF (d, a, b, c, x[1], S12, 0xe8c7b756L); /* 2 */
@@ -267,45 +251,41 @@ Instance间共享*/
     /*Decode把byte数组按顺序合成成long数组，因为java的long类型是64bit的，
     只合成低32bit，高32bit清零，以适应原始C实现的用途
     */
-    private void Decode (long[] output, byte[] input, int len) {
+    private void Decode(long[] output, byte[] input) {
         int i, j;
         
-        for (i = 0, j = 0; j < len; i++, j += 4)
+        for (i = 0, j = 0;j < 64;i++, j += 4)
             output[i] = b2iu(input[j]) |
                     (b2iu(input[j + 1]) << 8) |
                     (b2iu(input[j + 2]) << 16) |
                     (b2iu(input[j + 3]) << 24);
-        return;
     }
     /*
     b2iu是我写的一个把byte按照不考虑正负号的原则的＂升位＂程序，因为java没有unsigned运算
     */
-    public static long b2iu(byte b) {
+    private static long b2iu(byte b) {
         return b < 0 ? b & 0x7F + 128 : b;
     }
     /*byteHEX()，用来把一个byte类型的数转换成十六进制的ASCII表示，
     　因为java中的byte的toString无法实现这一点，我们又没有C语言中的
     sprintf(outbuf,"%02X",ib)
     */
-    public static String byteHEX(byte ib) {
+    private static String byteHEX(byte ib) {
         char[] Digit = { '0','1','2','3','4','5','6','7','8','9',
                 'A','B','C','D','E','F' };
         char [] ob = new char[2];
         ob[0] = Digit[(ib >>>4) & 0X0F];
         ob[1] = Digit[ib & 0X0F];
-        String s = new String(ob);
-        return s;
+        return new String(ob);
     }
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         
         MD5Bean m = new MD5Bean();
-        if
-        (Array.getLength(args) == 0) { //如果没有参数，执行标准的Test Suite
+        if(Array.getLength(args) == 0) { //如果没有参数，执行标准的Test Suite
             System.out.println("md5Bean Test suite:");
             System.out.print(m.getmd5BeanofStr("woaiguqianmeng"));
         }
-        else
-            System.out.println("md5Bean(" + args[0] + ")=" + m.getmd5BeanofStr(args[0]));
+        else System.out.println("md5Bean(" + args[0] + ")=" + m.getmd5BeanofStr(args[0]));
         
     }
     

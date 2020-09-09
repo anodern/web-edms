@@ -21,8 +21,8 @@
             <ul class="par">
                 <li><a href="course">课程浏览</a></li>
                 <li><a href="mcourse-add.jsp">课程新增</a></li>
-                <li><a href="mcourse-edit.jsp">课程编辑</a></li>
-                <li><a href="editcourses.jsp">批量编辑</a></li>
+                <li><a href="">课程编辑</a></li>
+                <li><a href="">批量编辑</a></li>
             </ul>
         </div>
         <div class="main-content">
@@ -34,15 +34,15 @@
                     </div>
                     <div class="col-input">
                         <label>课程学院</label>
-                        <input class="itext" name="cname" maxlength="30">
+                        <input class="itext" name="secollname" maxlength="30">
                     </div>
                     <div class="col-input">
                         <label>课程属性</label>
-                        <input class="itext" name="cname" maxlength="30">
+                        <input class="itext" name="ctype" maxlength="30">
                     </div>
                     <div class="col-input">
-                        <input type="submit" class="btn" name="cname" value="查询">
-                        <input type="reset" class="btn" name="cname" value="重置">
+                        <input type="submit" class="btn" value="查询">
+                        <input type="reset" class="btn" value="重置">
                     </div>
 
                 </form>

@@ -131,7 +131,7 @@ public class DBConn {
 		return pb;
 	}
     
-    PageBean getAllAsPage(String sql, String[] params, int curPage){
+    private PageBean getAllAsPage(String sql, String[] params, int curPage){
         List data=this.getList(sql, params);
         PageBean pb=new PageBean();
         pb.setCurPage(curPage);

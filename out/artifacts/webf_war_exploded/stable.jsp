@@ -54,30 +54,7 @@
                     </table>
                 </div>
 
-                <%--页号--%>
-                <div class="pager">
-                    每页${pageBean.pageSize}行  共${pageBean.totalRows}行  页数 ${pageBean.curPage}/${pageBean.totalPages}
-                    <c:choose>
-                        <c:when test="${pageBean.curPage==1}">
-                            <span class="btn-s-d">首页</span>
-                            <span class="btn-s-d">上一页</span>
-                        </c:when>
-                        <c:otherwise>
-                            <a class="btn-s" href="student?page=1">首页</a>
-                            <a class="btn-s" href="student?page=${pageBean.curPage-1}">上一页</a>
-                        </c:otherwise>
-                    </c:choose>
-                    <c:choose>
-                        <c:when test="${pageBean.curPage==pageBean.totalPages}">
-                            <span class="btn-s-d">下一页</span>
-                            <span class="btn-s-d">尾页</span>
-                        </c:when>
-                        <c:otherwise>
-                            <a class="btn-s" href="student?page=${pageBean.curPage+1}">下一页</a>
-                            <a class="btn-s" href="student?page=${pageBean.totalPages}">尾页</a>
-                        </c:otherwise>
-                    </c:choose>
-                </div>
+
             </div>
         </div>
     </div>

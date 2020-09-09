@@ -130,16 +130,34 @@ public class CourseServlet extends HttpServlet {
             default:{
                 // 获得要显示的页数
                 String page = request.getParameter("page");
-                // 当前的页数
+                String cname = request.getParameter("cname");
+                String secollname = request.getParameter("secollname");
+                String ctype = request.getParameter("ctype");
+                if(cname==null) cname="";
+                if(secollname==null) secollname="";
+                if(ctype==null) ctype="";
+                
+                // 默认为1，传入覆盖
                 int curPage = 1;
-                // 如没有传入的页数
                 if (page != null && page.length() > 0) {
                     curPage = Integer.parseInt(page);
                 }
                 // 调用模型
                 CourseDB courseDB = new CourseDB();
+                
                 // 将PageBean放入到request中转发
-                request.setAttribute("pageBean", courseDB.getCoursePage(curPage));
+                if(cname.isEmpty() && secollname.isEmpty() && ctype.isEmpty()){
+                    request.setAttribute("pageBean", courseDB.getCoursePage(curPage));
+                }else{
+                    StringBuilder sb=new StringBuilder("SELECT * FROM course WHERE cname LIKE '%");
+                    sb.append(cname);
+                    sb.append("%' AND secoll LIKE '%");
+                    sb.append(secollname);
+                    sb.append("%' AND type LIKE '%");
+                    sb.append(ctype);
+                    sb.append("%'");
+                    request.setAttribute("pageBean", courseDB.getCoursePage(curPage,sb.toString()));
+                }
                 courseDB.close();
                 request.getRequestDispatcher("mcourse.jsp").forward(request, response);
             }
