@@ -32,37 +32,6 @@ public class LoginServlet extends HttpServlet {;
             return;
         }
         
-        //TODO: 快捷登录
-        if(id.equals("0")) {
-            User user=new User();
-            user.setId("1000");
-            user.setName("anodern");
-            user.setLevel(0);
-        
-            session.setAttribute("user",user);
-            session.setAttribute("isLogin",true);
-            //response.sendRedirect("course");
-        }
-        if(id.equals("1")) {
-            User user=new User();
-            user.setId("25001");
-            user.setName("教师1");
-            user.setLevel(1);
-        
-            session.setAttribute("user",user);
-            session.setAttribute("isLogin",true);
-            //response.sendRedirect("course");
-        }
-        if(id.equals("2")) {
-            User user=new User();
-            user.setId("202180301");
-            user.setName("陈洁文");
-            user.setLevel(2);
-        
-            session.setAttribute("user",user);
-            session.setAttribute("isLogin",true);
-            //response.sendRedirect("course");
-        }
         
         String pass = (new MD5Bean().getmd5BeanofStr(request.getParameter("pass"))).toLowerCase();
         String vcode=request.getParameter("vcode");
@@ -78,6 +47,34 @@ public class LoginServlet extends HttpServlet {;
         
         //TODO:无视验证码
         vcode=realVcode;
+        //TODO:快速登陆
+        boolean fl=true;
+        if(fl){
+            User user=new User();
+            user.setLevel(level);
+            session.setAttribute("isLogin",true);
+            session.setAttribute("user",user);
+            
+            switch(type){
+                case "0":{
+                    user.setId("1000");
+                    user.setName("教务");
+                    response.sendRedirect("course");
+                } break;
+                case "1":{
+                    user.setId("25001");
+                    user.setName("教师1");
+                    response.sendRedirect("table");
+                }  break;
+                case "2":{
+                    user.setId("202180301");
+                    user.setName("某学生");
+                    response.sendRedirect("table");
+                } break;
+                default: response.sendRedirect("login.jsp");
+            }
+            return;
+        }
         
         if(vcode.equalsIgnoreCase(realVcode)){
             UserDB userDB=new UserDB();

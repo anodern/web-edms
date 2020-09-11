@@ -20,7 +20,7 @@
         <div class="sidebar">
             <ul class="par">
                 <li><a href="csel">选课浏览</a></li>
-                <li><a href="scsel-detail.jsp">选课详情</a></li>
+                <li><a href="">选课详情</a></li>
                 <li><a href="scsel-result.jsp">已选课程</a></li>
             </ul>
         </div>

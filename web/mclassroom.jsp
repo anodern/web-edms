@@ -22,8 +22,8 @@
                 <li><a href="classroom">教室浏览</a></li>
                 <li><a href="classroom-add.jsp">教室新增</a></li>
                 <li><a href="classroom-adds.jsp">批量新增</a></li>
-                <li><a href="classroom-edit.jsp">教室编辑</a></li>
-                <li><a href="classroom-edits.jsp">批量编辑</a></li>
+                <li><a href="">教室编辑</a></li>
+                <li><a href="">批量编辑</a></li>
             </ul>
         </div>
         <div class="main-content">
