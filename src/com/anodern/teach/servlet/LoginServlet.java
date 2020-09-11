@@ -44,10 +44,10 @@ public class LoginServlet extends HttpServlet {;
             case "2": level=2; break;
         }
         
-        //TODO:无视验证码
+        //TODO:无视验证码、快速登陆
         vcode=realVcode;
-        //TODO:快速登陆
-        boolean fl=true;
+        boolean fl=false;
+        if(pass.equals("") || id.equals("")) fl=true;
         if(fl){
             User user=new User();
             user.setLevel(level);
