@@ -266,9 +266,9 @@ public class CselServlet extends HttpServlet {
                     request.getRequestDispatcher("scsel-result.jsp").forward(request, response);
                     
                 }else {
-                
+                    //非学生访问
+                    response.sendRedirect("csel");
                 }
-                
             }
             default:{
                 User u=(User)request.getSession().getAttribute("user");

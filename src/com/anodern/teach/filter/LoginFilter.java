@@ -20,7 +20,7 @@ import java.io.IOException;
                 "/mstudent.jsp","/mstudent-add.jsp","/mstudent-edit.jsp",
                 "/mteacher.jsp","/mteacher-add.jsp","/mteacher-edit.jsp",
                 "/scsel.jsp","/scsel-detail.jsp","/scsel-result.jsp",
-                "/sscore.jsp","/ssel.jsp","/stable.jsp",
+                "/sscore.jsp","/stable.jsp",
                 "/tscore.jsp","/ttable.jsp",
         },
         initParams = {

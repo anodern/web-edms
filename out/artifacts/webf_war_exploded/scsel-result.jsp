@@ -25,7 +25,6 @@
             </ul>
         </div>
         <div class="main-content">
-b
             <%--主要内容--%>
             <div class="main-content-main">
                 <div class="content-table">
