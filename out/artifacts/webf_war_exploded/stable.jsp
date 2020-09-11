@@ -25,7 +25,7 @@
             <%--主要内容--%>
             <div class="main-content-main">
                 <div class="content-table">
-                    <table>
+                    <table class="clstable">
                         <tr>
                             <th>星期一</th>
                             <th>星期二</th>

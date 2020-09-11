@@ -263,17 +263,20 @@ td{
     padding: 8px 12px;
     font-size: 13px;
 }
-tr:nth-of-type(2){background-color: #f7f7f7;}
-tr:nth-of-type(3){background-color: #fff;}
-tr:nth-of-type(4){background-color: #eee;}
-tr:nth-of-type(5){background-color: #fff;}
-tr:nth-of-type(6){background-color: #f7f7f7;}
-tr:nth-of-type(7){background-color: #fff;}
-tr:nth-of-type(8){background-color: #eee;}
-tr:nth-of-type(9){background-color: #fff;}
-tr:nth-of-type(10){background-color: #f7f7f7;}
-tr:nth-of-type(11){background-color: #fff;}
-tr:nth-of-type(12){background-color: #eee;}
+tr:nth-of-type(even){background-color: #f7f7f7;}
+tr:nth-of-type(odd){background-color: #fff;}
+
+.clstable tr:nth-of-type(2){background-color: #f7f7f7;}
+.clstable tr:nth-of-type(3){background-color: #fff;}
+.clstable tr:nth-of-type(4){background-color: #eee;}
+.clstable tr:nth-of-type(5){background-color: #fff;}
+.clstable tr:nth-of-type(6){background-color: #f7f7f7;}
+.clstable tr:nth-of-type(7){background-color: #fff;}
+.clstable tr:nth-of-type(8){background-color: #eee;}
+.clstable tr:nth-of-type(9){background-color: #fff;}
+.clstable tr:nth-of-type(10){background-color: #f7f7f7;}
+.clstable tr:nth-of-type(11){background-color: #fff;}
+.clstable tr:nth-of-type(12){background-color: #eee;}
 
 
 .pager{
