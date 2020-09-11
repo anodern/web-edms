@@ -4,7 +4,6 @@ import com.anodern.teach.MD5Bean;
 import com.anodern.teach.UserDB;
 import com.anodern.teach.entity.User;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +14,7 @@ import java.io.PrintWriter;
 
 @WebServlet(value = "/login", name = "LoginServlet")
 public class LoginServlet extends HttpServlet {;
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setCharacterEncoding("utf-8");
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out=response.getWriter();
@@ -106,7 +105,7 @@ public class LoginServlet extends HttpServlet {;
         }
     }
     
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         doPost(request,response);
     }
 }

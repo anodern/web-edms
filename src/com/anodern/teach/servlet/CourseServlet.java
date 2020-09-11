@@ -149,14 +149,13 @@ public class CourseServlet extends HttpServlet {
                 if(cname.isEmpty() && secollname.isEmpty() && ctype.isEmpty()){
                     request.setAttribute("pageBean", courseDB.getCoursePage(curPage));
                 }else{
-                    StringBuilder sb=new StringBuilder("SELECT * FROM course WHERE cname LIKE '%");
-                    sb.append(cname);
-                    sb.append("%' AND secoll LIKE '%");
-                    sb.append(secollname);
-                    sb.append("%' AND type LIKE '%");
-                    sb.append(ctype);
-                    sb.append("%'");
-                    request.setAttribute("pageBean", courseDB.getCoursePage(curPage,sb.toString()));
+                    String sb = "SELECT * FROM course WHERE cname LIKE '%" + cname +
+                            "%' AND secoll LIKE '%" +
+                            secollname +
+                            "%' AND type LIKE '%" +
+                            ctype +
+                            "%'";
+                    request.setAttribute("pageBean", courseDB.getCoursePage(curPage, sb));
                 }
                 courseDB.close();
                 request.getRequestDispatcher("mcourse.jsp").forward(request, response);
