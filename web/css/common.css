@@ -258,7 +258,6 @@ th{
     font-size: 13px;
 }
 td{
-    width: 14%;
     color: #678197;
     padding: 8px 12px;
     font-size: 13px;
@@ -266,6 +265,7 @@ td{
 tr:nth-of-type(even){background-color: #f7f7f7;}
 tr:nth-of-type(odd){background-color: #fff;}
 
+.clstable td{width: 14%;}
 .clstable tr:nth-of-type(2){background-color: #f7f7f7;}
 .clstable tr:nth-of-type(3){background-color: #fff;}
 .clstable tr:nth-of-type(4){background-color: #eee;}
