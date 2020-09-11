@@ -12,29 +12,26 @@ import java.io.IOException;
 
 @WebFilter(
         urlPatterns = {
-                "/course","/csel","/teacher","/student","/classroom","/table","/score",
+                "/course","/teacher","/student","/classroom",
                 
                 "/classroom-add.jsp","/classroom-edit.jsp","/mclassroom.jsp",
                 "/mcourse.jsp","/mcourse-add.jsp","/mcourse-edit.jsp",
                 "/msel.jsp","/msel-do.jsp","/msel-put.jsp",
                 "/mstudent.jsp","/mstudent-add.jsp","/mstudent-edit.jsp",
                 "/mteacher.jsp","/mteacher-add.jsp","/mteacher-edit.jsp",
-                "/scsel.jsp","/scsel-detail.jsp","/scsel-result.jsp",
-                "/sscore.jsp","/ssel.jsp","/stable.jsp",
-                "/tscore.jsp","/ttable.jsp",
         },
         initParams = {
-                @WebInitParam(name="backurl",value = "/login.jsp")
-        },
-        filterName = "LoginFilter")
-public class LoginFilter implements Filter {
+                @WebInitParam(name="backurl",value = "/table")
+        },filterName = "AdminFilter")
+public class AdminFilter implements Filter {
     public void destroy() {
     }
     
     String backUrl;
+    
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
         //doFilter()方法的参数并不是HTTP对象，如果必要，需要将ServletResponse转换为HttpServletRequest
-        System.out.println("filter:登录检查");
+        System.out.println("filter:admin检查");
         HttpServletRequest httpRequest=(HttpServletRequest)req;
         HttpServletResponse httpResponse=(HttpServletResponse)resp;
     
@@ -42,9 +39,9 @@ public class LoginFilter implements Filter {
         HttpSession session=httpRequest.getSession();
     
         //如果没有登陆就中断过滤器链，返回到登录页面
-        Boolean flag=(Boolean)session.getAttribute("isLogin");
         User u=(User)session.getAttribute("user");
-        if(flag==null||!flag||u==null){
+        if(u.getLevel()!=0){
+            System.out.println("无权访问");
             httpResponse.sendRedirect(backUrl);
         }else{
             //下一个Filter
@@ -57,7 +54,7 @@ public class LoginFilter implements Filter {
         if(config.getInitParameter("backurl")!=null){
             backUrl=config.getInitParameter("backurl");
         }else {
-            backUrl="login.jsp";
+            backUrl="table";
         }
     }
     

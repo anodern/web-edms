@@ -22,6 +22,15 @@ public class LoginServlet extends HttpServlet {;
         HttpSession session=request.getSession();
     
         String id = request.getParameter("id");
+        String action = request.getParameter("action");
+        if(action!=null && action.equals("quit")){
+            //退出登录
+            session.removeAttribute("user");
+            session.setAttribute("isLogin",false);
+    
+            response.sendRedirect("login.jsp");
+            return;
+        }
         
         //TODO: 快捷登录
         if(id.equals("0")) {

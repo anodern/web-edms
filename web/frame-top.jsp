@@ -66,6 +66,7 @@
         <%
             if(u!=null){
                 out.print(u.getName() + "，欢迎使用教务系统！");
+                out.print("&nbsp;&nbsp;<a href=\"login?action=quit\" style=\"color: crimson;\">注销</a>");
             }else{
                 out.print("请登录");
             }
