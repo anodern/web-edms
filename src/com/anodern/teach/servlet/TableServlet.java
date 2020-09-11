@@ -38,6 +38,7 @@ public class TableServlet extends HttpServlet {
                     Map t = (Map)o;
                     String cname = (String)t.get("cname");
                     String rno = (String)t.get("rno");
+                    
                     String[] timesp = ((String)t.get("time")).split(";");
                     for(String s : timesp){
                         String[] timespsp = s.split(",");
@@ -71,19 +72,28 @@ public class TableServlet extends HttpServlet {
                     String cname = (String)t.get("cname");
                     String tname = (String)t.get("tname");
                     String rno = (String)t.get("rno");
+                    
+                    //返回示例：三,3-4;五,3-4
+                    //不同时段切分
                     String[] timesp = ((String)t.get("time")).split(";");
                     for(String s : timesp){
                         String[] timespsp = s.split(",");
+                        //星期节数切分
+                        //timespsp[0]=星期  timespsp[1]=节数
                         String[] clts = timespsp[1].split("-");
-                        for(int k = Integer.parseInt(clts[0]);k <= Integer.parseInt(clts[1]);k++){
-                            tb[getWeek(timespsp[0])][k - 1] = cname + "<br>" + rno + "<br>" + tname;
+                        //clts[0]=起始  clts[1]=结束
+                        int start=Integer.parseInt(clts[0]);
+                        int end=Integer.parseInt(clts[1]);
+                        tb[getWeek(timespsp[0])][start-1] = "<td rowspan=\""+ (end-start+1) +"\">" + cname + "<br>" + rno + "<br>" + tname + "</td>";
+                        for(int k=start+1; k<=end; k++){
+                            tb[getWeek(timespsp[0])][k - 1] = "";
                         }
                     }
                 }
     
                 for(int i = 0;i < 7;i++){
                     for(int j = 0;j < 11;j++){
-                        if(tb[i][j]==null) tb[i][j]=" <br> <br> ";
+                        if(tb[i][j]==null) tb[i][j]="<td> <br> <br> </td>";
                     }
                 }
     
@@ -104,6 +114,7 @@ public class TableServlet extends HttpServlet {
             case "六":return 5;
             case "七":
             case "日":
+            case "天":
                 return 6;
         }
         return 6;

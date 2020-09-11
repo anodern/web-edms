@@ -23,7 +23,7 @@
                 <li><a href="csel">选课结果</a></li>
                 <li><a href="msel-put.jsp">发布选课</a></li>
                 <li><a href="msel-adds.jsp">批量发布</a></li>
-                <li><a href="msel-edit.jsp">编辑选课</a></li>
+                <li><a href="">编辑选课</a></li>
                 <li><a href="msel-do.jsp">安排上课</a></li>
             </ul>
         </div>

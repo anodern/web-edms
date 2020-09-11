@@ -45,7 +45,8 @@
                             for(int i = 0;i < 11;i++){
                                 out.println("<tr>");
                                 for(int j = 0;j < 7;j++){
-                                    out.println("<td>"+tb[j][i]+"</td>");
+                                    if(!tb[j][i].equals(""))
+                                        out.println(tb[j][i]);
                                 }
                                 out.println("</tr>");
                             }
