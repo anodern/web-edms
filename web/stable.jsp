@@ -15,7 +15,6 @@
 <body>
 <div class="viewport">
     <%@ include file="frame-top.jsp" %>
-
     <div class="content">
         <div class="sidebar">
             <ul class="par">
@@ -23,11 +22,8 @@
             </ul>
         </div>
         <div class="main-content">
-
-
             <%--主要内容--%>
             <div class="main-content-main">
-
                 <div class="content-table">
                     <table>
                         <tr>
@@ -39,7 +35,6 @@
                             <th>星期六</th>
                             <th>星期日</th>
                         </tr>
-
                         <%
                             String[][] tb = (String[][])request.getAttribute("table");
                             for(int i = 0;i < 11;i++){
@@ -50,16 +45,12 @@
                                 }
                                 out.println("</tr>");
                             }
-
                         %>
                     </table>
                 </div>
-
-
             </div>
         </div>
     </div>
 </div>
-
 </body>
 </html>

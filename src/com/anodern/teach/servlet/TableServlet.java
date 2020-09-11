@@ -43,15 +43,19 @@ public class TableServlet extends HttpServlet {
                     for(String s : timesp){
                         String[] timespsp = s.split(",");
                         String[] clts = timespsp[1].split("-");
-                        for(int k = Integer.parseInt(clts[0]);k <= Integer.parseInt(clts[1]);k++){
-                            tb[getWeek(timespsp[0])][k - 1] = cname + "<br>" + rno;
+                        //clts[0]=起始  clts[1]=结束
+                        int start=Integer.parseInt(clts[0]);
+                        int end=Integer.parseInt(clts[1]);
+                        tb[getWeek(timespsp[0])][start-1] = "<td rowspan=\""+ (end-start+1) +"\">" + cname + "<br>" + rno + "</td>";
+                        for(int k=start+1; k<=end; k++){
+                            tb[getWeek(timespsp[0])][k - 1] = "";
                         }
                     }
                 }
-                
+    
                 for(int i = 0;i < 7;i++){
                     for(int j = 0;j < 11;j++){
-                        if(tb[i][j]==null) tb[i][j]=" <br> <br> ";
+                        if(tb[i][j]==null) tb[i][j]="<td> <br> <br> </td>";
                     }
                 }
     
