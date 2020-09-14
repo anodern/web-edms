@@ -20,6 +20,7 @@ public class LoginServlet extends HttpServlet {;
         PrintWriter out=response.getWriter();
         HttpSession session=request.getSession();
     
+    
         String id = request.getParameter("id");
         String action = request.getParameter("action");
         if(action!=null && action.equals("quit")){
