@@ -66,9 +66,11 @@ public class CselServlet extends HttpServlet {
             case "do":{
                 //批量选课
                 String id = request.getParameter("id");
-//                CselRangeDB cselRangeDB=new CselRangeDB();
-//                SelectRange c=cselRangeDB.getEntity(request.getParameter("id"));
+                CselRangeDB cselRangeDB=new CselRangeDB();
+                SelectRange c=cselRangeDB.getEntity(request.getParameter("id"));
+                
                 request.setAttribute("id", id);
+                request.setAttribute("c", c);
 //                cselRangeDB.close();
                 request.getRequestDispatcher("msel-dosel.jsp").forward(request, response);
                 

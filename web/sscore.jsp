@@ -31,7 +31,9 @@
                             <th>课程号</th>
                             <th>课程名</th>
                             <th>学期</th>
-                            <th>成绩</th>
+                            <th>平时成绩</th>
+                            <th>期末成绩</th>
+                            <th>总评成绩</th>
                         </tr>
 
                         <%
@@ -42,7 +44,11 @@
                                 out.println("<td>"+a.get("cno")+"</td>");
                                 out.println("<td>"+a.get("cname")+"</td>");
                                 out.println("<td>"+a.get("year")+"</td>");
+                                String scoreA = (String)a.get("scoreA");
+                                String scoreB = (String)a.get("scoreB");
                                 String score = (String)a.get("score");
+                                out.println("<td>"+ ((scoreA==null)?"":scoreA) +"</td>");
+                                out.println("<td>"+ ((scoreB==null)?"":scoreB) +"</td>");
                                 out.println("<td>"+ ((score==null)?"":score) +"</td>");
                                 out.println("</tr>");
                             }

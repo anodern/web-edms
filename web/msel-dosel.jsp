@@ -1,4 +1,5 @@
-<%--
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Map" %><%--
   Created by IntelliJ IDEA.
   User: anodern
   Date: 2020/6/10
@@ -29,7 +30,6 @@
         <div class="main-content">
             <%--主要内容--%>
             <div class="main-content-main">
-
                 <div class="content-float">
                     <h2>安排上课</h2>
                     <hr>
@@ -56,6 +56,35 @@
                             <label class="i-label">*学期</label>
                             <input type="text" name="year" class="i-text">
                         </div>
+
+                        <table>
+                            <tr>
+                                <th>课程号</th>
+                                <th>课程名</th>
+                                <th>教师</th>
+                                <th>教室</th>
+                                <th>上课时间</th>
+                                <th>上课周数</th>
+                            </tr>
+
+                            <%
+                                List lst = (List)request.getAttribute("score");
+                                for(int i = 0;i < lst.size();i++){
+                                    Map a = (Map)lst.get(i);
+                                    out.println("<tr>");
+                                    out.println("<td>"+a.get("cno")+"</td>");
+                                    out.println("<td>"+a.get("cname")+"</td>");
+                                    out.println("<td>"+a.get("year")+"</td>");
+                                    String scoreA = (String)a.get("scoreA");
+                                    String scoreB = (String)a.get("scoreB");
+                                    String score = (String)a.get("score");
+                                    out.println("<td>"+ ((scoreA==null)?"":scoreA) +"</td>");
+                                    out.println("<td>"+ ((scoreB==null)?"":scoreB) +"</td>");
+                                    out.println("<td>"+ ((score==null)?"":score) +"</td>");
+                                    out.println("</tr>");
+                                }
+                            %>
+                        </table>
 
                         <div class="box">
                             <span class="btns">
