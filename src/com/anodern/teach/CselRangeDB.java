@@ -70,9 +70,8 @@ public class CselRangeDB extends DBConn {
                 pst.setString(3,entity.getCrange());
                 pst.setString(4,entity.getTime());
                 pst.setString(5,entity.getStart());
-                pst.setString(6,entity.getName());
+                pst.setString(6,entity.getEnd());
                 pst.setString(7,entity.getId());
-
                 result=pst.executeUpdate();
             }catch(SQLException sqle){
                 System.err.println(sqle.getMessage());

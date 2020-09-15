@@ -47,6 +47,60 @@ public class CselServlet extends HttpServlet {
                 response.sendRedirect("csel");
                 break;
             }
+            case "result":{
+                //选课结果
+                String id=request.getParameter("id");
+                String srange=request.getParameter("srange");
+                String crange=request.getParameter("crange");
+        
+                SelectRange entity=new SelectRange();
+                entity.setSrange(srange);
+                entity.setCrange(crange);
+        
+                CselTempDB entityDB=new CselTempDB();
+                request.setAttribute("pageBean", entityDB.getAllPage("SELECT * FROM viewcseltemp WHERE rangeid="+id));
+                entityDB.close();
+                request.getRequestDispatcher("mcsel-result.jsp").forward(request, response);
+                break;
+            }
+            case "do":{
+                //批量选课
+                String id = request.getParameter("id");
+//                CselRangeDB cselRangeDB=new CselRangeDB();
+//                SelectRange c=cselRangeDB.getEntity(request.getParameter("id"));
+                request.setAttribute("id", id);
+//                cselRangeDB.close();
+                request.getRequestDispatcher("msel-dosel.jsp").forward(request, response);
+                
+            }break;
+            case "do-ok":{
+                //批量选课提交
+                String id=request.getParameter("id");
+                String time=request.getParameter("time");
+                String week=request.getParameter("week");
+                String year=request.getParameter("year");
+                String tno=request.getParameter("tno");
+                String rno=request.getParameter("rno");
+        
+                CselTempDB cselTempDB=new CselTempDB();
+                CselDB cDB=new CselDB();
+                List sl = cselTempDB.getList("SELECT * FROM cseltemp WHERE rangeid=?",new String[]{id});
+                System.out.println(sl.size());
+                for(int i = 0;i < sl.size();i++){
+                    Select sel=new Select();
+                    sel.setSno(Integer.parseInt((String)((HashMap)sl.get(i)).get("sno")));
+                    sel.setCno(Integer.parseInt((String)((HashMap)sl.get(i)).get("cno")));
+                    sel.setRno(rno);
+                    sel.setTno(Integer.parseInt(tno));
+                    sel.setTime(time);
+                    sel.setYear(year);
+                    sel.setWeek(week);
+                    cDB.add(sel);
+                }
+                cselTempDB.close();
+                cDB.close();
+                response.sendRedirect("csel");
+            }break;
             case "dos":{
                 //批量选课
                 String sclass=request.getParameter("sclass");
@@ -110,20 +164,14 @@ public class CselServlet extends HttpServlet {
             case "del":{
                 System.out.println("删除");
             
-                int sno;
-                try{
-                    sno= Integer.parseInt(request.getParameter("sno"));
-                }catch(Exception e){
-                    out.println("<script>alert('输入错误！');history.go(-1);</script>");
-                    return;
-                }
+                String id= request.getParameter("id");
             
-                StudentDB studentDB=new StudentDB();
-                int a=studentDB.delete(sno);
-                studentDB.close();
-            
+                CselRangeDB cselRangeDB=new CselRangeDB();
+                int a=cselRangeDB.delete(id);
+                cselRangeDB.close();
+                
                 if(a>0){
-                    out.println("<script>alert('删除成功');window.location.href='student';</script>");
+                    out.println("<script>alert('删除成功');window.location.href='csel';</script>");
                 }else {
                     out.println("<script>alert('删除失败');history.go(-1);</script>");
                 }

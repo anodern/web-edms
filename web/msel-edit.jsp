@@ -20,7 +20,7 @@
         <div class="sidebar">
             <ul class="par">
                 <li><a href="csel">选课浏览</a></li>
-                <li><a href="csel">选课结果</a></li>
+                <li><a href="csel?action=result">选课结果</a></li>
                 <li><a href="msel-put.jsp">发布选课</a></li>
                 <li><a href="msel-adds.jsp">批量发布</a></li>
                 <li><a href="">编辑选课</a></li>
@@ -34,10 +34,10 @@
                     <h2>编辑选课</h2>
                     <hr>
                     <%--@elvariable id="entity" type="com.anodern.teach.entity.SelectRange"--%>
-                    <form name="frm1" action="csel?action=puteditok" method="post">
+                    <form name="frm1" action="csel?action=editok&id=${entity.id}" method="post">
                         <div class="box">
                             <label class="i-label">*选课ID</label>
-                            <input type="text" name="name" class="i-text" value="${entity.id}" disabled="disabled">
+                            <input type="text" name="id" class="i-text" value="${entity.id}" disabled="disabled">
                         </div>
                         <div class="box">
                             <label class="i-label">*选课名</label>

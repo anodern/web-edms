@@ -80,7 +80,9 @@
                             <td><c:out value="${entity.time}" /></td>
                             <td><c:out value="${entity.start}" /></td>
                             <td><c:out value="${entity.end}" /></td>
-                            <td><a href="csel?action=edit&id=<c:out value="${entity.id}"/>">编辑</a>&nbsp;&nbsp;
+                            <td><a href="csel?action=result&id=<c:out value="${entity.id}"/>">查看</a>&nbsp;
+                                <a href="csel?action=edit&id=<c:out value="${entity.id}"/>">编辑</a><br>
+                                <a href="csel?action=do&id=<c:out value="${entity.id}"/>">结束</a>&nbsp;
                                 <a href="csel?action=del&id=<c:out value="${entity.id}"/>">删除</a>
                             </td>
                         <tr>

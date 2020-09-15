@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>发布选课 - 教务管理系统</title>
+    <title>安排上课 - 教务管理系统</title>
     <link rel="stylesheet" href="css/common.css">
 </head>
 <body>
@@ -29,33 +29,32 @@
         <div class="main-content">
             <%--主要内容--%>
             <div class="main-content-main">
+
                 <div class="content-float">
-                    <h2>发布选课</h2>
+                    <h2>安排上课</h2>
                     <hr>
-                    <form name="frm1" action="csel?action=put" method="post">
-                        <div class="box">
-                            <label class="i-label">*选课名</label>
-                            <input type="text" name="name" class="i-text">
-                        </div>
-                        <div class="box">
-                            <label class="i-label">*学生班级</label>
-                            <input type="text" name="srange" class="i-text">
-                        </div>
-                        <div class="box">
-                            <label class="i-label">*课程范围</label>
-                            <input type="text" name="crange" class="i-text">
-                        </div>
+                    <%--@elvariable id="c" type="com.anodern.teach.entity.SelectRange"--%>
+                    <%--@elvariable id="id" type="java.lang.String"--%>
+                    <form name="frm1" action="csel?action=do-ok&id=${id}" method="post">
                         <div class="box">
                             <label class="i-label">*上课时间</label>
                             <input type="text" name="time" class="i-text">
                         </div>
                         <div class="box">
-                            <label class="i-label">*开始时间</label>
-                            <input type="date" name="start" class="i-text">
+                            <label class="i-label">*上课周数</label>
+                            <input type="text" name="week" class="i-text">
                         </div>
                         <div class="box">
-                            <label class="i-label">*结束时间</label>
-                            <input type="date" name="end" class="i-text">
+                            <label class="i-label">*教师</label>
+                            <input type="text" name="tno" class="i-text">
+                        </div>
+                        <div class="box">
+                            <label class="i-label">*教室</label>
+                            <input type="text" name="rno" class="i-text">
+                        </div>
+                        <div class="box">
+                            <label class="i-label">*学期</label>
+                            <input type="text" name="year" class="i-text">
                         </div>
 
                         <div class="box">

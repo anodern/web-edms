@@ -1,25 +1,27 @@
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.Map" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: anodern
   Date: 2020/6/4
-  Time: 21:43
+  Time: 21:44
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>成绩查询 - 教学管理系统</title>
+    <title>选课结果 - 教学管理系统</title>
     <link rel="stylesheet" href="css/common.css">
 </head>
 <body>
 <div class="viewport">
     <%@ include file="frame-top.jsp" %>
+
     <div class="content">
         <div class="sidebar">
             <ul class="par">
-                <li><a href="score">成绩录入</a></li>
+                <li><a href="csel">选课浏览</a></li>
+                <li><a href="">选课详情</a></li>
+                <li><a href="csel?action=s-sel-res">已选课程</a></li>
             </ul>
         </div>
         <div class="main-content">
@@ -28,26 +30,26 @@
                 <div class="content-table">
                     <table>
                         <tr>
-                            <th>课程</th>
                             <th>学号</th>
                             <th>姓名</th>
-                            <th>平时成绩</th>
-                            <th>期末成绩</th>
+                            <th>班级</th>
+                            <th>年级</th>
+                            <th>已选课程</th>
+                            <th>已选课程名</th>
                         </tr>
 
-                        <%
-                            List lst = (List)request.getAttribute("score");
-                            for(int i = 0;i < lst.size();i++){
-                                Map a = (Map)lst.get(i);
-                                out.println("<tr>");
-                                out.println("<td>"+a.get("cno")+"</td>");
-                                out.println("<td>"+a.get("sno")+"</td>");
-                                out.println("<td>"+a.get("sname")+"</td>");
-                                out.println("<td><input type=\"text\" size=\"5\" name=\""+a.get("sno")+"_1\"></td>");
-                                out.println("<td><input type=\"text\" size=\"5\" name=\""+a.get("sno")+"_2\"></td>");
-                                out.println("</tr>");
-                            }
-                        %>
+                        <%--@elvariable id="pageBean" type="com.anodern.teach.PageBean"--%>
+                        <%--@elvariable id="year" type="java.lang.String"--%>
+                        <c:forEach var="entity" items="${pageBean.data}" varStatus="vs">
+                        <tr>
+                            <td><c:out value="${entity.sno}" /></td>
+                            <td><c:out value="${entity.sname}" /></td>
+                            <td><c:out value="${entity.grade}" /></td>
+                            <td><c:out value="${entity.sclass}" /></td>
+                            <td><c:out value="${entity.cno}" /></td>
+                            <td><c:out value="${entity.cname}" /></td>
+                        <tr>
+                        </c:forEach>
                     </table>
                 </div>
 
@@ -76,8 +78,10 @@
                     </c:choose>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
+
 </body>
 </html>
