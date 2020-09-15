@@ -38,6 +38,7 @@ public class TableServlet extends HttpServlet {
                     Map t = (Map)o;
                     String cname = (String)t.get("cname");
                     String rno = (String)t.get("rno");
+                    String week = (String)t.get("week");
                     
                     String[] timesp = ((String)t.get("time")).split(";");
                     for(String s : timesp){
@@ -46,7 +47,7 @@ public class TableServlet extends HttpServlet {
                         //clts[0]=起始  clts[1]=结束
                         int start=Integer.parseInt(clts[0]);
                         int end=Integer.parseInt(clts[1]);
-                        tb[getWeek(timespsp[0])][start-1] = "<td rowspan=\""+ (end-start+1) +"\">" + cname + "<br>" + rno + "</td>";
+                        tb[getWeek(timespsp[0])][start-1] = "<td rowspan=\""+ (end-start+1) +"\">" + cname + "<br>" + rno+ "<br>" + week + "</td>";
                         for(int k=start+1; k<=end; k++){
                             tb[getWeek(timespsp[0])][k - 1] = "";
                         }
@@ -76,6 +77,7 @@ public class TableServlet extends HttpServlet {
                     String cname = (String)t.get("cname");
                     String tname = (String)t.get("tname");
                     String rno = (String)t.get("rno");
+                    String week = (String)t.get("week");
                     
                     //返回示例：三,3-4;五,3-4
                     //不同时段切分
@@ -88,7 +90,7 @@ public class TableServlet extends HttpServlet {
                         //clts[0]=起始  clts[1]=结束
                         int start=Integer.parseInt(clts[0]);
                         int end=Integer.parseInt(clts[1]);
-                        tb[getWeek(timespsp[0])][start-1] = "<td rowspan=\""+ (end-start+1) +"\">" + cname + "<br>" + rno + "<br>" + tname + "</td>";
+                        tb[getWeek(timespsp[0])][start-1] = "<td rowspan=\""+ (end-start+1) +"\">" + cname + "<br>" + rno + "<br>" + tname+ "<br>" + week + "</td>";
                         for(int k=start+1; k<=end; k++){
                             tb[getWeek(timespsp[0])][k - 1] = "";
                         }

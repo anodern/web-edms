@@ -30,6 +30,7 @@ public class CselDB extends DBConn {
             stu.setRno(rs.getString("rno"));
             stu.setYear(rs.getString("year"));
             stu.setTime(rs.getString("time"));
+            stu.setWeek(rs.getString("week"));
             stu.setScore(rs.getString("score"));
             rs.close();
             
@@ -45,14 +46,15 @@ public class CselDB extends DBConn {
         if(conn!=null){
             try{
                 PreparedStatement pst=conn.prepareStatement("insert into csel" +
-                        "(sno,cno,tno,rno,year,time,score) values(?,?,?,?,?,?,?)");
+                        "(sno,cno,tno,rno,year,time,week,score) values(?,?,?,?,?,?,?,?)");
                 pst.setInt(1,entity.getSno());
                 pst.setInt(2,entity.getCno());
                 pst.setInt(3,entity.getTno());
                 pst.setString(4,entity.getRno());
                 pst.setString(5,entity.getYear());
                 pst.setString(6,entity.getTime());
-                pst.setString(7,entity.getScore());
+                pst.setString(7,entity.getWeek());
+                pst.setString(8,entity.getScore());
                 result=pst.executeUpdate();
             }catch(SQLException sqle){
                 System.err.println(sqle.getMessage());
@@ -66,14 +68,15 @@ public class CselDB extends DBConn {
         if(conn!=null){
             try{
                 PreparedStatement pst=conn.prepareStatement("UPDATE csel SET sno=?,cno=?,tno=?,rno=?," +
-                        "year=?,time=?,score=? WHERE sno=?");
+                        "year=?,time=?,week=?,score=? WHERE sno=?");
                 pst.setInt(1,entity.getSno());
                 pst.setInt(2,entity.getCno());
                 pst.setInt(3,entity.getTno());
                 pst.setString(4,entity.getRno());
                 pst.setString(5,entity.getYear());
                 pst.setString(6,entity.getTime());
-                pst.setString(7,entity.getScore());
+                pst.setString(7,entity.getWeek());
+                pst.setString(8,entity.getScore());
 
                 result=pst.executeUpdate();
             }catch(SQLException sqle){

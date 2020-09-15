@@ -31,6 +31,7 @@ public class CselTempDB extends DBConn {
             stu.setRno(rs.getString("rno"));
             stu.setYear(rs.getString("year"));
             stu.setTime(rs.getString("time"));
+            stu.setWeek(rs.getString("week"));
             stu.setRangeId(rs.getString("rangeid"));
             rs.close();
             
@@ -46,14 +47,17 @@ public class CselTempDB extends DBConn {
         if(conn!=null){
             try{
                 PreparedStatement pst=conn.prepareStatement("insert into cselTemp" +
-                        "(sno,cno,tno,rno,year,time,rangeid) values(?,?,?,?,?,?,?)");
+                        "(sno,cno,tno,rno,year,time,week,rangeid) values(?,?,?,?,?,?,?,?)");
                 pst.setString(1,entity.getSno());
                 pst.setString(2,entity.getCno());
                 pst.setString(3,entity.getTno());
                 pst.setString(4,entity.getRno());
                 pst.setString(5,entity.getYear());
                 pst.setString(6,entity.getTime());
-                pst.setString(7,entity.getRangeId());
+                pst.setString(7,entity.getWeek());
+                pst.setString(8,entity.getRangeId());
+                //TODO
+                System.out.println(entity.getRangeId());
                 result=pst.executeUpdate();
             }catch(SQLException sqle){
                 System.err.println(sqle.getMessage());

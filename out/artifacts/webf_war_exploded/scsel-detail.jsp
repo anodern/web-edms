@@ -45,6 +45,7 @@
 
                         <%--@elvariable id="pageBean" type="com.anodern.teach.PageBean"--%>
                         <%--@elvariable id="id" type="java.lang.String"--%>
+                        <%--@elvariable id="year" type="java.lang.String"--%>
                         <c:forEach var="course" items="${pageBean.data}" varStatus="vs">
                         <tr>
                             <td><c:out value="${course.cno}"/></td>
@@ -53,7 +54,7 @@
                             <td><c:out value="${course.credit}"/></td>
                             <td><c:out value="${course.first}"/></td>
                             <td>开课学院</td>
-                            <td><a class="btn-s" href="csel?action=s-add&id=<c:out value="${id}"/>&cno=<c:out value="${course.cno}"/>">选课</a></td>
+                            <td><a class="btn-s" href="csel?action=s-add&id=<c:out value="${id}"/>&year=<c:out value="${year}"/>&cno=<c:out value="${course.cno}"/>">选课</a></td>
                         <tr>
                             </c:forEach>
                     </table>

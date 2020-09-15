@@ -46,7 +46,7 @@
                         <tr>
                             <td><c:out value="${entity.id}" /></td>
                             <td><c:out value="${entity.name}" /></td>
-                            <td><c:out value="${entity.srange}" /></td>
+                            <td><c:out value="${entity.cname}" /></td>
                             <td><c:out value="${entity.crange}" /></td>
                             <td><c:out value="${entity.time}" /></td>
                             <td><c:out value="${entity.start}" /></td>

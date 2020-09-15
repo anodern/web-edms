@@ -109,6 +109,7 @@ public class CselServlet extends HttpServlet {
             
             case "add":{
                 //添加选课信息
+                //TODO
                 int sno;
                 try{
                     sno= Integer.parseInt(request.getParameter("sno"));
@@ -118,23 +119,10 @@ public class CselServlet extends HttpServlet {
                 }
                 String sname=request.getParameter("sname");
                 String sex=request.getParameter("sex");
-                String birthday=request.getParameter("birthday");
-                String nation=request.getParameter("nation");
-                String grade=request.getParameter("grade");
-                String secoll=request.getParameter("secoll");
-                String spec=request.getParameter("spec");
                 String sclass=request.getParameter("sclass");
             
                 Student stu=new Student();
                 stu.setSno(sno);
-                stu.setSname(sname);
-                stu.setSex(sex);
-                stu.setBirthday(birthday);
-                stu.setNation(nation);
-                stu.setGrade(grade);
-                stu.setSecoll(secoll);
-                stu.setSpec(spec);
-                stu.setSclass(sclass);
                 stu.setPass("e10adc3949ba59abbe56e057f20f883e");
             
                 StudentDB studentDB=new StudentDB();
@@ -145,7 +133,7 @@ public class CselServlet extends HttpServlet {
             }
             case "edit":{
                 System.out.println("编辑");
-            
+                //TODO
                 StudentDB studentDB=new StudentDB();
                 Student c=studentDB.getEntity(request.getParameter("sno"));
                 request.setAttribute("stu", c);
@@ -156,7 +144,8 @@ public class CselServlet extends HttpServlet {
             }
             case "editre":{
                 System.out.println("编辑提交");
-            
+                
+                //TODO
                 int sno,oldsno;
                 try{
                     sno= Integer.parseInt(request.getParameter("sno"));
@@ -166,12 +155,6 @@ public class CselServlet extends HttpServlet {
                     return;
                 }
                 String sname=request.getParameter("sname");
-                String sex=request.getParameter("sex");
-                String birthday=request.getParameter("birthday");
-                String nation=request.getParameter("nation");
-                String grade=request.getParameter("grade");
-                String secoll=request.getParameter("secoll");
-                String spec=request.getParameter("spec");
                 String sclass=request.getParameter("sclass");
             
                 Student stu=new Student();
@@ -224,13 +207,14 @@ public class CselServlet extends HttpServlet {
                     sql.append(" OR cno=");
                     sql.append(cranges[i]);
                 }
-                PageBean cpg=courseDB.getAllPage(sql.toString());
+                PageBean pageBean=courseDB.getAllPage(sql.toString());
                 courseDB.close();
                 
                 
-                request.setAttribute("pageBean", cpg);
+                request.setAttribute("pageBean", pageBean);
                 request.setAttribute("year", tMap.get("year"));
-                request.setAttribute("id", tMap.get("id"));
+                //request.setAttribute("id", tMap.get("id"));
+                request.setAttribute("id", id);
         
                 request.getRequestDispatcher("scsel-detail.jsp").forward(request, response);
                 break;
@@ -242,6 +226,7 @@ public class CselServlet extends HttpServlet {
                 String id=request.getParameter("id");
                 String cno=request.getParameter("cno");
                 String year=request.getParameter("year");
+                //if(year==null || year.equals("")) year="2020";
         
                 SelectTemp selTemp=new SelectTemp();
                 selTemp.setCno(cno);
@@ -251,20 +236,20 @@ public class CselServlet extends HttpServlet {
         
                 CselTempDB db=new CselTempDB();
                 db.add(selTemp);
+                System.out.println("添加");
                 db.close();
                 response.sendRedirect("csel");
                 break;
             }
             case "s-sel-res":{
                 User u=(User)request.getSession().getAttribute("user");
-    
-                if(u.getLevel()==2){String sno=u.getId();
+                if(u.getLevel()==2){
+                    String sno=u.getId();
                     int curPage=1;
-                    CselDB entityDB = new CselDB();
+                    CselTempDB entityDB = new CselTempDB();
                     request.setAttribute("pageBean", entityDB.getAllPage(curPage,"SELECT * FROM viewCselTemp WHERE sno="+sno));
                     entityDB.close();
                     request.getRequestDispatcher("scsel-result.jsp").forward(request, response);
-                    
                 }else {
                     //非学生访问
                     response.sendRedirect("csel");

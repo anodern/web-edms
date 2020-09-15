@@ -7,6 +7,7 @@ public class SelectTemp {
     private String rno;
     private String year;
     private String time;
+    private String week;
     private String rangeId;
     
     public String getTno() {
@@ -55,6 +56,14 @@ public class SelectTemp {
     
     public void setYear(String year) {
         this.year = year;
+    }
+    
+    public String getWeek() {
+        return week;
+    }
+    
+    public void setWeek(String week) {
+        this.week = week;
     }
     
     public String getRangeId() {

@@ -7,6 +7,7 @@ public class Select {
     private String rno;
     private String year;
     private String time;
+    private String week;
     private String score;
     
     public int getTno() {
@@ -55,6 +56,14 @@ public class Select {
     
     public void setYear(String year) {
         this.year = year;
+    }
+    
+    public String getWeek() {
+        return week;
+    }
+    
+    public void setWeek(String week) {
+        this.week = week;
     }
     
     public String getScore() {
