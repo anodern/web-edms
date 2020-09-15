@@ -1,3 +1,4 @@
+
 <%--
   Created by IntelliJ IDEA.
   User: anodern
@@ -8,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>发布选课 - 教务管理系统</title>
+    <title>编辑选课 - 教务管理系统</title>
     <link rel="stylesheet" href="css/common.css">
 </head>
 <body>
@@ -30,32 +31,37 @@
             <%--主要内容--%>
             <div class="main-content-main">
                 <div class="content-float">
-                    <h2>发布选课</h2>
+                    <h2>编辑选课</h2>
                     <hr>
-                    <form name="frm1" action="csel?action=put" method="post">
+                    <%--@elvariable id="entity" type="com.anodern.teach.entity.SelectRange"--%>
+                    <form name="frm1" action="csel?action=puteditok" method="post">
+                        <div class="box">
+                            <label class="i-label">*选课ID</label>
+                            <input type="text" name="name" class="i-text" value="${entity.id}" disabled="disabled">
+                        </div>
                         <div class="box">
                             <label class="i-label">*选课名</label>
-                            <input type="text" name="name" class="i-text">
+                            <input type="text" name="name" class="i-text" value="${entity.name}">
                         </div>
                         <div class="box">
                             <label class="i-label">*学生班级</label>
-                            <input type="text" name="srange" class="i-text">
+                            <input type="text" name="srange" class="i-text" value="${entity.srange}">
                         </div>
                         <div class="box">
                             <label class="i-label">*课程范围</label>
-                            <input type="text" name="crange" class="i-text">
+                            <input type="text" name="crange" class="i-text" value="${entity.crange}">
                         </div>
                         <div class="box">
                             <label class="i-label">*上课时间</label>
-                            <input type="text" name="time" class="i-text">
+                            <input type="text" name="time" class="i-text" value="${entity.time}">
                         </div>
                         <div class="box">
                             <label class="i-label">*开始时间</label>
-                            <input type="date" name="start" class="i-text">
+                            <input type="date" name="start" class="i-text" value="${entity.start}">
                         </div>
                         <div class="box">
                             <label class="i-label">*结束时间</label>
-                            <input type="date" name="end" class="i-text">
+                            <input type="date" name="end" class="i-text" value="${entity.end}">
                         </div>
 
                         <div class="box">

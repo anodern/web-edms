@@ -70,17 +70,17 @@ public class CselServlet extends HttpServlet {
                     cDB.add(sel);
                 }
             }
-            case "putedit":{
+            case "edit":{
                 System.out.println("编辑发布");
                 CselRangeDB cselRangeDB=new CselRangeDB();
                 SelectRange c=cselRangeDB.getEntity(request.getParameter("id"));
-                request.setAttribute("range", c);
+                request.setAttribute("entity", c);
                 cselRangeDB.close();
         
-                request.getRequestDispatcher("mstudent-edit.jsp").forward(request, response);
+                request.getRequestDispatcher("msel-edit.jsp").forward(request, response);
                 break;
             }
-            case "puteditok":{
+            case "editok":{
                 System.out.println("编辑发布提交");
     
                 String id=request.getParameter("id");
@@ -107,67 +107,6 @@ public class CselServlet extends HttpServlet {
                 break;
             }
             
-            case "add":{
-                //添加选课信息
-                //TODO
-                int sno;
-                try{
-                    sno= Integer.parseInt(request.getParameter("sno"));
-                }catch(Exception e){
-                    out.println("<script>alert('输入错误！');history.go(-1);</script>");
-                    return;
-                }
-                String sname=request.getParameter("sname");
-                String sex=request.getParameter("sex");
-                String sclass=request.getParameter("sclass");
-            
-                Student stu=new Student();
-                stu.setSno(sno);
-                stu.setPass("e10adc3949ba59abbe56e057f20f883e");
-            
-                StudentDB studentDB=new StudentDB();
-                studentDB.add(stu);
-                studentDB.close();
-                response.sendRedirect("student");
-                break;
-            }
-            case "edit":{
-                System.out.println("编辑");
-                //TODO
-                StudentDB studentDB=new StudentDB();
-                Student c=studentDB.getEntity(request.getParameter("sno"));
-                request.setAttribute("stu", c);
-                studentDB.close();
-            
-                request.getRequestDispatcher("mstudent-edit.jsp").forward(request, response);
-                break;
-            }
-            case "editre":{
-                System.out.println("编辑提交");
-                
-                //TODO
-                int sno,oldsno;
-                try{
-                    sno= Integer.parseInt(request.getParameter("sno"));
-                    oldsno= Integer.parseInt(request.getParameter("oldsno"));
-                }catch(Exception e){
-                    out.println("<script>alert('输入错误！');history.go(-1);</script>");
-                    return;
-                }
-                String sname=request.getParameter("sname");
-                String sclass=request.getParameter("sclass");
-            
-                Student stu=new Student();
-                stu.setSno(sno);
-                stu.setSname(sname);
-                stu.setSclass(sclass);
-            
-                StudentDB studentDB=new StudentDB();
-                studentDB.update(oldsno,stu);
-                studentDB.close();
-                response.sendRedirect("student");
-                break;
-            }
             case "del":{
                 System.out.println("删除");
             
@@ -255,7 +194,28 @@ public class CselServlet extends HttpServlet {
                     response.sendRedirect("csel");
                 }
             }
+            case "s-sel-del":{
+                System.out.println("退选");
+        
+                String sno,cno,year;
+                sno=request.getParameter("sno");
+                cno=request.getParameter("cno");
+                year=request.getParameter("year");
+                System.out.println(sno+"|"+cno+"|"+year);
+        
+                CselTempDB entityDB=new CselTempDB();
+                int a=entityDB.delete(sno,cno,year);
+                entityDB.close();
+        
+                if(a>0){
+                    out.println("<script>alert('退选成功');window.location.href='csel';</script>");
+                }else {
+                    out.println("<script>alert('退选失败');history.go(-1);</script>");
+                }
+                return;
+            }
             default:{
+                //默认显示选课浏览
                 User u=(User)request.getSession().getAttribute("user");
                 if(u==null){ System.out.println("user为空");response.sendRedirect("login.jsp");return;}
                 switch(u.getLevel()){

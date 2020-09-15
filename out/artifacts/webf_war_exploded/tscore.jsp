@@ -28,9 +28,11 @@
                 <div class="content-table">
                     <table>
                         <tr>
+                            <th>课程</th>
                             <th>学号</th>
                             <th>姓名</th>
-                            <th>成绩</th>
+                            <th>平时成绩</th>
+                            <th>期末成绩</th>
                         </tr>
 
                         <%
@@ -38,9 +40,11 @@
                             for(int i = 0;i < lst.size();i++){
                                 Map a = (Map)lst.get(i);
                                 out.println("<tr>");
+                                out.println("<td>"+a.get("cno")+"</td>");
                                 out.println("<td>"+a.get("sno")+"</td>");
                                 out.println("<td>"+a.get("sname")+"</td>");
-                                out.println("<td><input type=\"text\" size=\"5\" name=\""+a.get("sno")+"\"></td>");
+                                out.println("<td><input type=\"text\" size=\"5\" name=\""+a.get("sno")+"_1\"></td>");
+                                out.println("<td><input type=\"text\" size=\"5\" name=\""+a.get("sno")+"_2\"></td>");
                                 out.println("</tr>");
                             }
                         %>

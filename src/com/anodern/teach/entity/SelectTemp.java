@@ -10,6 +10,17 @@ public class SelectTemp {
     private String week;
     private String rangeId;
     
+    //add
+    private String cname;
+    
+    public String getCname() {
+        return cname;
+    }
+    
+    public void setCname(String cname) {
+        this.cname = cname;
+    }
+    
     public String getTno() {
         return tno;
     }

@@ -35,8 +35,6 @@
                             <th>已选课程</th>
                             <th>已选课程名</th>
                             <th>上课时间</th>
-                            <th>开始时间</th>
-                            <th>结束时间</th>
                             <th>操作</th>
                         </tr>
 
@@ -46,12 +44,10 @@
                         <tr>
                             <td><c:out value="${entity.id}" /></td>
                             <td><c:out value="${entity.name}" /></td>
+                            <td><c:out value="${entity.cno}" /></td>
                             <td><c:out value="${entity.cname}" /></td>
-                            <td><c:out value="${entity.crange}" /></td>
                             <td><c:out value="${entity.time}" /></td>
-                            <td><c:out value="${entity.start}" /></td>
-                            <td><c:out value="${entity.end}" /></td>
-                            <td><a class="btn-s" href="csel?action=s-seldel&sno=<c:out value="${sessionScope.user.id}"/>&cno=<c:out value="${entity.cno}"/>&year=<c:out value="${year}"/>">退选</a>&nbsp;&nbsp;
+                            <td><a class="btn-s" href="csel?action=s-sel-del&sno=<c:out value="${sessionScope.user.id}"/>&cno=<c:out value="${entity.cno}"/>&year=<c:out value="${entity.year}"/>">退选</a>&nbsp;&nbsp;
                             </td>
                         <tr>
                         </c:forEach>

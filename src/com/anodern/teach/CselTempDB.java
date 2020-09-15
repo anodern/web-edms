@@ -72,7 +72,7 @@ public class CselTempDB extends DBConn {
                 PreparedStatement pst=conn.prepareStatement("delete from cselTemp where sno=? AND cno=? AND year=?");
                 pst.setString(1,sno);
                 pst.setString(2,cno);
-                pst.setString(2,year);
+                pst.setString(3,year);
                 return pst.executeUpdate();
             }catch(SQLException sqle){
                 System.err.println(sqle.getMessage());
