@@ -94,14 +94,12 @@ public class TableServlet extends HttpServlet {
                         int end=Integer.parseInt(clts[1]);
     
                         if(selweek.equals("")){
-                            System.out.println("全部周");
                             tb[getWeek(timespsp[0])][start-1] = "<td rowspan=\""+ (end-start+1) +"\">" + cname + "<br>" + rno + "<br>" + tname+ "<br>" + week + "</td>";
                             for(int k=start+1; k<=end; k++){
                                 tb[getWeek(timespsp[0])][k - 1] = "";
                             }
                             
                         }else{
-                            System.out.println("单独周");
                             StringBuilder weekend= new StringBuilder(",");
                             String[] weeksp=week.split(";");
                             for(String sp:weeksp){
@@ -114,7 +112,6 @@ public class TableServlet extends HttpServlet {
                                     weekend.append(sp).append(",");
                                 }
                             }
-                            System.out.println(weekend);
                             if(weekend.toString().contains(","+selweek+",")){tb[getWeek(timespsp[0])][start-1] = "<td rowspan=\""+ (end-start+1) +"\">" + cname + "<br>" + rno + "<br>" + tname+ "<br>" + week + "</td>";
                                 for(int k=start+1; k<=end; k++){
                                     tb[getWeek(timespsp[0])][k - 1] = "";
