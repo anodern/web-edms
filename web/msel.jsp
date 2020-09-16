@@ -86,7 +86,7 @@
                                 <a href="csel?action=del&id=<c:out value="${entity.id}"/>">删除</a>
                             </td>
                         <tr>
-                            </c:forEach>
+                        </c:forEach>
                     </table>
                 </div>
 

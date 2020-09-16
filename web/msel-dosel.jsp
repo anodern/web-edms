@@ -1,5 +1,7 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.List" %>
-<%@ page import="java.util.Map" %><%--
+<%@ page import="java.util.Map" %>
+<%--
   Created by IntelliJ IDEA.
   User: anodern
   Date: 2020/6/10
@@ -33,7 +35,7 @@
                 <div class="content-float">
                     <h2>安排上课</h2>
                     <hr>
-                    <%--@elvariable id="c" type="com.anodern.teach.entity.SelectRange"--%>
+                    <%--@elvariable id="csel" type="com.anodern.teach.entity.SelectRange"--%>
                     <%--@elvariable id="id" type="java.lang.String"--%>
                     <form name="frm1" action="csel?action=do-ok&id=${id}" method="post">
                         <div class="box">
@@ -66,6 +68,24 @@
                                 <th>上课时间</th>
                                 <th>上课周数</th>
                             </tr>
+
+                            <%--@elvariable id="pageBean" type="com.anodern.teach.PageBean"--%>
+                            <c:forEach var="entity" items="${csel}" varStatus="vs">
+                            <tr>
+                                <td><c:out value="${entity.cno}" /></td>
+                                <td><c:out value="${entity.cname}" /></td>
+                                <td><c:out value="${entity.srange}" /></td>
+                                <td><c:out value="${entity.crange}" /></td>
+                                <td><c:out value="${entity.time}" /></td>
+                                <td><c:out value="${entity.start}" /></td>
+                                <td><c:out value="${entity.end}" /></td>
+                                <td><a href="csel?action=result&id=<c:out value="${entity.id}"/>">查看</a>&nbsp;
+                                    <a href="csel?action=edit&id=<c:out value="${entity.id}"/>">编辑</a><br>
+                                    <a href="csel?action=do&id=<c:out value="${entity.id}"/>">结束</a>&nbsp;
+                                    <a href="csel?action=del&id=<c:out value="${entity.id}"/>">删除</a>
+                                </td>
+                            <tr>
+                            </c:forEach>
 
                             <%
                                 List lst = (List)request.getAttribute("score");
