@@ -20,9 +20,11 @@ public class TableServlet extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
     
         String year = request.getParameter("year");
+        String selweek = request.getParameter("week");
         User u = (User)request.getSession().getAttribute("user");
         
         if(year==null) year="20201";
+        if(selweek==null) selweek="";
         if(u==null) return;
         
         switch(u.getLevel()){
@@ -90,9 +92,34 @@ public class TableServlet extends HttpServlet {
                         //clts[0]=起始  clts[1]=结束
                         int start=Integer.parseInt(clts[0]);
                         int end=Integer.parseInt(clts[1]);
-                        tb[getWeek(timespsp[0])][start-1] = "<td rowspan=\""+ (end-start+1) +"\">" + cname + "<br>" + rno + "<br>" + tname+ "<br>" + week + "</td>";
-                        for(int k=start+1; k<=end; k++){
-                            tb[getWeek(timespsp[0])][k - 1] = "";
+    
+                        if(selweek.equals("")){
+                            System.out.println("全部周");
+                            tb[getWeek(timespsp[0])][start-1] = "<td rowspan=\""+ (end-start+1) +"\">" + cname + "<br>" + rno + "<br>" + tname+ "<br>" + week + "</td>";
+                            for(int k=start+1; k<=end; k++){
+                                tb[getWeek(timespsp[0])][k - 1] = "";
+                            }
+                            
+                        }else{
+                            System.out.println("单独周");
+                            StringBuilder weekend= new StringBuilder(",");
+                            String[] weeksp=week.split(";");
+                            for(String sp:weeksp){
+                                if(sp.contains("-")){
+                                    String[] spsp = sp.split("-");
+                                    for(int i=Integer.parseInt(spsp[0]);i<=Integer.parseInt(spsp[1]);i++){
+                                        weekend.append(i).append(",");
+                                    }
+                                }else{
+                                    weekend.append(sp).append(",");
+                                }
+                            }
+                            System.out.println(weekend);
+                            if(weekend.toString().contains(","+selweek+",")){tb[getWeek(timespsp[0])][start-1] = "<td rowspan=\""+ (end-start+1) +"\">" + cname + "<br>" + rno + "<br>" + tname+ "<br>" + week + "</td>";
+                                for(int k=start+1; k<=end; k++){
+                                    tb[getWeek(timespsp[0])][k - 1] = "";
+                                }
+                            }
                         }
                     }
                 }

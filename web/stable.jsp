@@ -24,6 +24,11 @@
         <div class="main-content">
             <%--主要内容--%>
             <div class="main-content-main">
+                <div class="box">
+                    <input style="width: 6em;height: 2.5em" type="text" id="week" name="week" value="" onchange="change()">
+                    <a type="button" id="selweek" class="btn" href="table?week=">确定</a>
+                </div>
+
                 <div class="content-table">
                     <table class="clstable">
                         <tr>
@@ -53,4 +58,5 @@
     </div>
 </div>
 </body>
+<script src="js/table.js"></script>
 </html>
