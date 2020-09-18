@@ -1,5 +1,6 @@
 package com.anodern.teach.servlet;
 
+import com.anodern.teach.ColorBean;
 import com.anodern.teach.CselDB;
 import com.anodern.teach.entity.Table;
 import com.anodern.teach.entity.User;
@@ -12,13 +13,17 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 @WebServlet(value = "/table",name = "tableServlet")
 public class TableServlet extends HttpServlet {
+    
+    
+    
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setContentType("text/html; charset=UTF-8");
-    
+        
         String year = request.getParameter("year");
         String selweek = request.getParameter("week");
         User u = (User)request.getSession().getAttribute("user");
@@ -83,7 +88,12 @@ public class TableServlet extends HttpServlet {
                     
                     //返回示例：三,3-4;五,3-4
                     //不同时段切分
+                    Random random = new Random();
+                    String thisColor = ColorBean.colors[random.nextInt(ColorBean.colors.length)];
+                    
                     String[] timesp = ((String)t.get("time")).split(";");
+                    //String ctype = (String)t.get("ctype"));
+                    
                     for(String s : timesp){
                         String[] timespsp = s.split(",");
                         //星期节数切分
@@ -92,9 +102,12 @@ public class TableServlet extends HttpServlet {
                         //clts[0]=起始  clts[1]=结束
                         int start=Integer.parseInt(clts[0]);
                         int end=Integer.parseInt(clts[1]);
+                        
     
                         if(selweek.equals("")){
-                            tb[getWeek(timespsp[0])][start-1] = "<td rowspan=\""+ (end-start+1) +"\">" + cname + "<br>" + rno + "<br>" + tname+ "<br>" + week + "</td>";
+                            tb[getWeek(timespsp[0])][start-1] = "<td style=\"background-color: "+ thisColor +"\" rowspan=\""
+                                    + (end-start+1) +"\">" + cname + "<br>" + rno + "<br>" + tname+ "<br>" + week + "</td>";
+                            
                             for(int k=start+1; k<=end; k++){
                                 tb[getWeek(timespsp[0])][k - 1] = "";
                             }
@@ -112,7 +125,10 @@ public class TableServlet extends HttpServlet {
                                     weekend.append(sp).append(",");
                                 }
                             }
-                            if(weekend.toString().contains(","+selweek+",")){tb[getWeek(timespsp[0])][start-1] = "<td rowspan=\""+ (end-start+1) +"\">" + cname + "<br>" + rno + "<br>" + tname+ "<br>" + week + "</td>";
+                            if(weekend.toString().contains(","+selweek+",")){tb[getWeek(timespsp[0])][start-1] =String.format(
+                                    "<td style=\"background-color: %s\" rowspan=\"%d\">%s<br>%s<br>%s<br>%s</td>",
+                                            thisColor, end - start + 1, cname, rno, tname, week);
+                            
                                 for(int k=start+1; k<=end; k++){
                                     tb[getWeek(timespsp[0])][k - 1] = "";
                                 }
