@@ -63,7 +63,6 @@
                         </tr>
                         <%
                             String[][] tb = (String[][])request.getAttribute("table");
-                            String[][] tbColor = (String[][])request.getAttribute("color");
 
                             for(int i = 0;i < 11;i++){
                                 out.println("<tr>");

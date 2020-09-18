@@ -59,7 +59,7 @@
                             <input type="text" name="year" class="i-text">
                         </div>
 
-                        <table>
+                        <%--<table>
                             <tr>
                                 <th>课程号</th>
                                 <th>课程名</th>
@@ -69,7 +69,7 @@
                                 <th>上课周数</th>
                             </tr>
 
-                            <%--@elvariable id="pageBean" type="com.anodern.teach.PageBean"--%>
+                            &lt;%&ndash;@elvariable id="pageBean" type="com.anodern.teach.PageBean"&ndash;%&gt;
                             <c:forEach var="entity" items="${csel}" varStatus="vs">
                             <tr>
                                 <td><c:out value="${entity.cno}" /></td>
@@ -104,7 +104,7 @@
                                     out.println("</tr>");
                                 }
                             %>
-                        </table>
+                        </table>--%>
 
                         <div class="box">
                             <span class="btns">
