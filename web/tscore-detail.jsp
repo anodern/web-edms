@@ -28,29 +28,41 @@
                 <div class="content-table">
                     <table>
                         <tr>
-                            <th>ID</th>
-                            <th>课程名</th>
-                            <th>课程类型</th>
-                            <th>学分</th>
-                            <th>先修课程</th>
-                            <th>开课学院</th>
-                            <th>操作</th>
+                            <th>课程</th>
+                            <th>学号</th>
+                            <th>姓名</th>
+                            <th>平时成绩</th>
+                            <th>期末成绩</th>
+                            <th>总评成绩</th>
                         </tr>
-
-                        <%--@elvariable id="courses" type="java.util.List"--%>
-                        <c:forEach var="course" items="${courses}" varStatus="vs">
+                        <%--@elvariable id="score" type="java.util.List"--%>
+                        <c:forEach var="s" items="${score}" varStatus="vs">
                         <tr>
-                            <td><c:out value="${course.cno}"/></td>
-                            <td><c:out value="${course.cname}"/></td>
-                            <td><c:out value="${course.type}"/></td>
-                            <td><c:out value="${course.credit}"/></td>
-                            <td><c:out value="${course.first}"/></td>
-                            <td>开课学院</td>
-                            <td><a href="score?action=add&cno=<c:out value="${course.cno}"/>">录入</a>
-                            </td>
+                            <td><c:out value="${s.cno}"/></td>
+                            <td><c:out value="${s.sno}"/></td>
+                            <td><c:out value="${s.sname}"/></td>
+                            <td><input type="text" size="5" id="<c:out value="${s.sno}"/>_1" name="<c:out value="${s.sno}"/>_1" onchange="change(<c:out value="${s.sno}"/>)"></td>
+                            <td><input type="text" size="5" id="<c:out value="${s.sno}"/>_2" name="<c:out value="${s.sno}"/>_2" onchange="change(<c:out value="${s.sno}"/>)"></td>
+                            <td><input type="text" size="5" id="<c:out value="${s.sno}"/>" name="<c:out value="${s.sno}"/>"></td>
+
                         <tr>
                         </c:forEach>
+
+<%--                        <%
+                            List lst = (List)request.getAttribute("score");
+                            for(int i = 0;i < lst.size();i++){
+                                Map a = (Map)lst.get(i);
+                                out.println("<tr>");
+                                out.println("<td>"+a.get("cno")+"</td>");
+                                out.println("<td>"+a.get("sno")+"</td>");
+                                out.println("<td>"+a.get("sname")+"</td>");
+                                out.println("<td><input type=\"text\" size=\"5\" name=\""+a.get("sno")+"_1\"></td>");
+                                out.println("<td><input type=\"text\" size=\"5\" name=\""+a.get("sno")+"_2\"></td>");
+                                out.println("</tr>");
+                            }
+                        %>--%>
                     </table>
+                    <a class="btn-s" href="student?page=${pageBean.totalPages}">提交</a>
                 </div>
 
                 <%--页号--%>
@@ -82,4 +94,5 @@
     </div>
 </div>
 </body>
+<script src="js/score.js"></script>
 </html>
